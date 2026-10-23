@@ -1,0 +1,111 @@
+/* ===== Custom styles: clean light theme, high-legibility (loaded after tailwind.css) ===== */
+:root {
+  --paper: #f6f7fb;
+  --ink: #0f172a;
+  --muted: #3b455e;
+  --line: #cfd5e6;
+  --accent: #2f4bff;
+  --accent-soft: #e9edff;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+body { background: var(--paper); color: var(--ink); line-height: 1.65; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+
+/* soft blue wash behind the hero */
+.hero-glow {
+  background:
+    radial-gradient(40% 50% at 8% 25%, rgba(47,75,255,.10), transparent 70%),
+    radial-gradient(40% 50% at 92% 15%, rgba(47,75,255,.12), transparent 70%);
+}
+
+/* ---------- Hero avatar ---------- */
+.avatar-wrap { position: relative; width: min(100%, 360px); aspect-ratio: 1 / 1.08; margin-inline: auto; }
+.avatar-frame { position: absolute; inset: 0; border: 2px solid var(--ink); border-radius: 2.2rem 2.2rem 6rem 2.2rem; transform: translate(16px, 16px); }
+.avatar {
+  position: absolute; inset: 0; overflow: hidden; display: grid; place-items: center;
+  border-radius: 2.2rem 2.2rem 6rem 2.2rem;
+  background: linear-gradient(145deg, #2f4bff 0%, #6f86ff 100%);
+}
+/* Your photo (assets/himanshu.jpg) covers the gradient. */
+.avatar-photo { position: absolute; inset: 0; background: url("../assets/himanshu.jpg") center 12% / cover no-repeat; }
+
+.chip {
+  position: absolute; z-index: 2; display: flex; align-items: center; gap: .5rem;
+  background: #fff; border: 1px solid var(--line); border-radius: 999px;
+  padding: .5rem 1rem; font-size: 1rem; font-weight: 700;
+  box-shadow: 0 10px 24px -12px rgba(15, 23, 42, .35);
+  animation: float 5s ease-in-out infinite;
+}
+.chip::before { content: ""; width: .6rem; height: .6rem; border-radius: 50%; background: var(--accent); }
+.chip-1 { top: 8%;  left: -8%;  animation-delay: 0s; }
+.chip-2 { top: 46%; right: -9%; animation-delay: -1.6s; }
+.chip-3 { bottom: 6%; left: -4%; animation-delay: -3.2s; }
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+
+/* ---------- Cards, badges ---------- */
+.card {
+  background: #fff; border: 1px solid #c3cadd;
+  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+.card:hover { transform: translateY(-6px); border-color: var(--accent); box-shadow: 0 22px 40px -22px rgba(47, 75, 255, .5); }
+
+.badge { background: var(--accent-soft); color: #1f34c8; font-weight: 700; transition: background .25s ease, color .25s ease; }
+.badge:hover { background: var(--accent); color: #fff; }
+
+/* ---------- Buttons ---------- */
+.btn-primary { border: 2px solid var(--accent); background: var(--accent); color: #fff; transition: transform .2s ease, box-shadow .2s ease, background .2s ease; }
+.btn-primary:hover { background: #1f38e0; border-color: #1f38e0; transform: translateY(-2px); box-shadow: 0 12px 24px -12px rgba(47, 75, 255, .8); }
+.btn-ghost { border: 2px solid var(--ink); color: var(--ink); background: transparent; transition: background .2s ease, color .2s ease, transform .2s ease; }
+.btn-ghost:hover { background: var(--ink); color: #fff; transform: translateY(-2px); }
+
+.nav-link { color: var(--muted); transition: color .2s ease; }
+.nav-link:hover { color: var(--accent); }
+
+/* contact icons */
+.icon-box { flex: none; display: grid; place-items: center; width: 3rem; height: 3rem; border-radius: .8rem; background: var(--accent-soft); color: var(--accent); transition: background .25s ease, color .25s ease; }
+a.card:hover .icon-box { background: var(--accent); color: #fff; }
+
+.timeline-dot { box-shadow: 0 0 0 6px var(--accent-soft); }
+
+/* ---------- Form fields ---------- */
+.field { width: 100%; border-radius: .7rem; padding: .8rem 1rem; background: var(--paper); border: 2px solid #aab3cc; color: var(--ink); transition: border-color .2s ease, box-shadow .2s ease, background .2s ease; }
+.field::placeholder { color: #5d6784; }
+.field:focus { outline: none; background: #fff; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(47, 75, 255, .2); }
+
+a:focus-visible, button:focus-visible, label:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+/* ---------- Grids ---------- */
+.edu-grid, .focus-grid { display: grid; gap: 1.5rem; grid-template-columns: 1fr; list-style: none; padding: 0; }
+.edu-grid > li, .focus-grid > li { height: 100%; }
+@media (min-width: 640px) { .edu-grid { grid-template-columns: repeat(2, 1fr); } .focus-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .edu-grid { grid-template-columns: repeat(3, 1fr); } .focus-grid { grid-template-columns: repeat(4, 1fr); } }
+
+/* contact: info list on the left, form on the right, tops aligned */
+.contact-grid { display: grid; gap: 2rem; grid-template-columns: 1fr; align-items: start; }
+@media (min-width: 1024px) { .contact-grid { grid-template-columns: 5fr 7fr; gap: 3rem; } }
+.contact-form, .contact-form:hover { transform: none !important; box-shadow: none; border-color: #c3cadd; }
+.contact-form:focus-within { border-color: var(--accent); }
+#form-status.ok { color: #0a7a3d; }
+#form-status.err { color: #b42318; }
+#send-btn:disabled { opacity: .6; cursor: wait; transform: none; }
+
+/* project cards: equal height, buttons pinned to the bottom */
+.proj > div:last-child > a, .proj > div:last-child > .btn-disabled { margin-top: 1.5rem; }
+.btn-disabled { border: 2px dashed var(--line); color: var(--muted); background: transparent; cursor: default; }
+
+/* keep the hover lift working after AOS finishes animating a card */
+.card[data-aos].aos-animate:hover { transform: translateY(-6px); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .chip { animation: none; }
+  .card, .badge, .btn-primary, .btn-ghost { transition: none; }
+  .card:hover, .btn-primary:hover, .btn-ghost:hover { transform: none; }
+}
+
+/* extra-strong contrast for users who request it (bright sun, accessibility settings) */
+@media (prefers-contrast: more) {
+  :root { --muted: #1e2740; --line: #8a94b0; }
+  .card { border-color: #1e2740; }
+  .badge { background: #fff; border: 2px solid currentColor; }
+}
